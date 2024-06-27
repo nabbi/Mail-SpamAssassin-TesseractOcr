@@ -4,8 +4,8 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 link("lib/Mail/SpamAssassin/Plugin/TesseractOcr/Preprocess.xs", "Preprocess.xs");
-chomp(my $libs    = `pkg-config opencv --libs`);
-chomp(my $ccflags = `pkg-config opencv --cflags`);
+chomp(my $libs    = `pkg-config opencv4 --libs`);
+chomp(my $ccflags = `pkg-config opencv4 --cflags`);
 die "cannot find opencv library." unless $libs;
 $ccflags .= '-Isrc '.$ccflags;
 WriteMakefile(
