@@ -2,6 +2,9 @@ use 5.020002;
 use strict;
 use warnings;
 use ExtUtils::MakeMaker;
+use ExtUtils::CppGuess;
+
+my $cpp = ExtUtils::CppGuess->new;
 
 link("lib/Mail/SpamAssassin/Plugin/TesseractOcr/Preprocess.xs", "Preprocess.xs");
 chomp(my $libs    = `pkg-config opencv4 --libs`);
@@ -26,4 +29,5 @@ WriteMakefile(
     CCFLAGS         => $ccflags,
     TYPEMAPS        => ['types.map'],
     dist            => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+    $cpp->makemaker_options,
 );
